@@ -168,10 +168,11 @@ public final class DirWatcher implements Runnable, AutoCloseable
         {
             FileVisitResult result = super.preVisitDirectory(dir, attrs);
             if (DirWatcher.this.dir.equals(dir))
-            {
-                dir.register(service, KINDS, MODIFIERS);
-                return result;
-            }
+                if (DirWatcher.this.dir.equals(dir))
+                {
+                    dir.register(service, KINDS, MODIFIERS);
+                    return result;
+                }
 
             // Maybe it's unnecessary to go deeper
             path.add(IOHelper.getFileName(dir));

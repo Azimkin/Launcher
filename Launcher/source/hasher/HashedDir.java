@@ -2,6 +2,7 @@ package launcher.hasher;
 
 import launcher.LauncherAPI;
 import launcher.helper.IOHelper;
+import launcher.helper.JVMHelper;
 import launcher.helper.VerifyHelper;
 import launcher.serialize.HInput;
 import launcher.serialize.HOutput;
@@ -260,7 +261,7 @@ public final class HashedDir extends HashedEntry
 
             // Verify is not symlink
             // Symlinks was disallowed because modification of it's destination are ignored by DirWatcher
-            if (!allowSymlinks && attrs.isSymbolicLink())
+            if (!allowSymlinks && (JVMHelper.OS_TYPE == JVMHelper.OS.MUSTDIE && !dir.toRealPath().equals(dir) || JVMHelper.OS_TYPE != JVMHelper.OS.MUSTDIE && attrs.isSymbolicLink()))
             {
                 throw new SecurityException("Symlinks are not allowed");
             }
@@ -278,7 +279,7 @@ public final class HashedDir extends HashedEntry
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
         {
             // Verify is not symlink
-            if (!allowSymlinks && attrs.isSymbolicLink())
+            if (!allowSymlinks && (JVMHelper.OS_TYPE == JVMHelper.OS.MUSTDIE && !file.toRealPath().equals(file) || JVMHelper.OS_TYPE != JVMHelper.OS.MUSTDIE && attrs.isSymbolicLink()))
             {
                 throw new SecurityException("Symlinks are not allowed");
             }

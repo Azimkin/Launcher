@@ -213,7 +213,7 @@ public final class ClientLauncher
             CommonHelper.newThread("Client Directory Watcher", true, clientWatcher).start();
 
             // Verify current state of all dirs
-            verifyHDir(IOHelper.JVM_DIR, jvmHDir.object, null, digest);
+            //verifyHDir(IOHelper.JVM_DIR, jvmHDir.object, null, digest);
             verifyHDir(params.assetDir, assetHDir.object, assetMatcher, digest);
             verifyHDir(params.clientDir, clientHDir.object, clientMatcher, digest);
 
