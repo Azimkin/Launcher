@@ -104,7 +104,7 @@ public final class ClientLauncher
         args.add(MAGICAL_INTEL_OPTION);
         if (params.ram > 0 && params.ram <= JVMHelper.RAM)
         {
-            args.add("-Xms" + params.ram + 'M');
+            args.add("-Xms128M");
             args.add("-Xmx" + params.ram + 'M');
         }
         args.add(jvmProperty(LogHelper.DEBUG_PROPERTY, Boolean.toString(LogHelper.isDebugEnabled())));
